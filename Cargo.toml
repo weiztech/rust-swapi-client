@@ -1,6 +1,6 @@
 [package]
 name = "swapi_client"
-version = "0.0.1"
+version = "0.0.2"
 edition = "2018"
 authors = ["Jensen Wijaya <weiztech@gmail.com>"]
 description = "Rust client for Star Wars API (https://swapi.co/)"
