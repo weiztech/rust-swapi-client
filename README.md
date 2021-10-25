@@ -10,7 +10,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-swapi_client = "0.0.2"
+swapi_client = "0.0.3"
 ```
 
 Query Star Wars objects:
