@@ -3,6 +3,7 @@
 use std::error::Error;
 use std::fmt;
 
+/// List API data type
 #[derive(Debug, serde::Deserialize, Default, Clone)]
 pub struct ListData<T> {
     pub count: usize,
@@ -36,6 +37,7 @@ impl<T> IntoIterator for ListData<T> {
     }
 }
 
+/// Custom error type for return failed response
 #[derive(Debug)]
 pub struct RequestFailed(pub reqwest::blocking::Response);
 

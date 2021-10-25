@@ -1,3 +1,5 @@
+//! Core requests handler
+
 use crate::common::{ListData, RequestFailed};
 
 use reqwest::StatusCode;
@@ -6,9 +8,10 @@ use std::error::Error;
 
 const API_URL: &'static str = "https://swapi.dev/api";
 
+/// Custom result type
 pub type Output<T> = std::result::Result<T, Box<dyn Error>>;
 
-// Get object handler
+/// Get object handler
 pub trait QueryDetail {
     fn get(id: usize, path: &'static str) -> Output<Box<Self>>
     where
@@ -24,7 +27,7 @@ pub trait QueryDetail {
     }
 }
 
-// List object handler
+/// List object handler
 pub trait QueryList {
     fn list(page: Option<usize>, path: &'static str) -> Output<Box<ListData<Self>>>
     where
