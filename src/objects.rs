@@ -1,6 +1,6 @@
 //! Star Wars Objects
 
-use crate::requests::{Output, QueryDetail, QueryList, RequestHandler};
+use crate::requests::{QueryDetail, QueryList, RequestHandler};
 
 use serde::Deserialize;
 
