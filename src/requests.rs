@@ -6,26 +6,27 @@ use std::error::Error;
 
 const API_URL: &'static str = "https://swapi.dev/api";
 
-type Output<T> = std::result::Result<T, Box<dyn Error>>;
+pub type Output<T> = std::result::Result<T, Box<dyn Error>>;
 
-/// Main request handler for query starwars objects
-pub trait RequestHandler {
-    const URL_PATH: &'static str;
-
-    fn get(id: usize) -> Output<Box<Self>>
+// Get object handler
+pub trait QueryDetail {
+    fn get(id: usize, path: &'static str) -> Output<Box<Self>>
     where
         Self: DeserializeOwned,
     {
-        match reqwest::blocking::get(API_URL.to_owned() + Self::URL_PATH + &id.to_string()) {
+        match reqwest::blocking::get(API_URL.to_owned() + path + &id.to_string()) {
             Ok(res) => match res.status() {
-                StatusCode::OK => Ok(Box::new(res.json::<Self>().unwrap())),
+                StatusCode::OK => Ok(res.json::<Self>().unwrap().into()),
                 _ => Err(RequestFailed(res).into()),
             },
             Err(error) => Err(error.into()),
         }
     }
+}
 
-    fn list(page: Option<usize>) -> Output<Box<ListData<Self>>>
+// List object handler
+pub trait QueryList {
+    fn list(page: Option<usize>, path: &'static str) -> Output<Box<ListData<Self>>>
     where
         Self: DeserializeOwned,
     {
@@ -34,12 +35,29 @@ pub trait RequestHandler {
             None => String::from("?page=1"),
         };
 
-        match reqwest::blocking::get(API_URL.to_owned() + Self::URL_PATH + &page) {
+        match reqwest::blocking::get(API_URL.to_owned() + path + &page) {
             Ok(res) => match res.status() {
-                StatusCode::OK => Ok(Box::new(res.json::<ListData<Self>>().unwrap())),
+                StatusCode::OK => Ok(res.json::<ListData<Self>>().unwrap().into()),
                 _ => Err(RequestFailed(res).into()),
             },
             Err(error) => Err(error.into()),
         }
+    }
+}
+/// Main request handler for query starwars objects
+pub trait RequestHandler: QueryDetail + QueryList {
+    const URL_PATH: &'static str;
+    fn list(page: Option<usize>) -> Output<Box<crate::common::ListData<Self>>>
+    where
+        Self: serde::de::DeserializeOwned,
+    {
+        QueryList::list(page, Self::URL_PATH)
+    }
+
+    fn get(id: usize) -> Output<Box<Self>>
+    where
+        Self: serde::de::DeserializeOwned,
+    {
+        QueryDetail::get(id, Self::URL_PATH)
     }
 }

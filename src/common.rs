@@ -11,6 +11,22 @@ pub struct ListData<T> {
     pub results: Vec<T>,
 }
 
+impl<T> ListData<T> {
+    pub fn has_next(&self) -> bool {
+        match &self.next {
+            Some(_) => true,
+            _ => false,
+        }
+    }
+
+    pub fn has_prev(&self) -> bool {
+        match &self.previous {
+            Some(_) => true,
+            _ => false,
+        }
+    }
+}
+
 impl<T> IntoIterator for ListData<T> {
     type Item = T;
     type IntoIter = std::vec::IntoIter<Self::Item>;
