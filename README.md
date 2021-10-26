@@ -11,7 +11,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-swapi_client = "0.0.5.1"
+swapi_client = "0.1.0"
 ```
 
 Example Usage:
