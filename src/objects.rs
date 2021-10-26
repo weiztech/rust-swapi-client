@@ -1,6 +1,6 @@
 //! Star Wars Objects
 
-use crate::requests::{QueryDetail, QueryList, RequestHandler};
+use crate::requests::{QueryDetail, QueryList, RequestHandler, UrlPath};
 
 use serde::Deserialize;
 
@@ -127,50 +127,52 @@ pub struct Species {
     url: String,
 }
 
+impl UrlPath for Planet {
+    const URL_PATH: &'static str = "/planets/";
+}
+
 impl QueryList for Planet {}
 
 impl QueryDetail for Planet {}
 
-impl RequestHandler for Planet {
-    const URL_PATH: &'static str = "/planets/";
+impl RequestHandler for Planet {}
+
+impl UrlPath for People {
+    const URL_PATH: &'static str = "/people/";
 }
 
 impl QueryList for People {}
 
 impl QueryDetail for People {}
 
-impl RequestHandler for People {
-    const URL_PATH: &'static str = "/people/";
+impl UrlPath for Film {
+    const URL_PATH: &'static str = "/films/";
 }
 
 impl QueryList for Film {}
 
 impl QueryDetail for Film {}
 
-impl RequestHandler for Film {
-    const URL_PATH: &'static str = "/films/";
+impl UrlPath for Starship {
+    const URL_PATH: &'static str = "/starships/";
 }
 
 impl QueryList for Starship {}
 
 impl QueryDetail for Starship {}
 
-impl RequestHandler for Starship {
-    const URL_PATH: &'static str = "/starships/";
+impl UrlPath for Vehicle {
+    const URL_PATH: &'static str = "/vehicles/";
 }
 
 impl QueryList for Vehicle {}
 
 impl QueryDetail for Vehicle {}
 
-impl RequestHandler for Vehicle {
-    const URL_PATH: &'static str = "/vehicles/";
+impl UrlPath for Species {
+    const URL_PATH: &'static str = "/species/";
 }
 
 impl QueryList for Species {}
 
 impl QueryDetail for Species {}
-
-impl RequestHandler for Species {
-    const URL_PATH: &'static str = "/species/";
-}

@@ -6,6 +6,7 @@ use std::fmt;
 /// List API data type
 #[derive(Debug, serde::Deserialize, Default, Clone)]
 pub struct ListData<T> {
+    pub current_page: Option<u8>,
     pub count: usize,
     pub next: Option<String>,
     pub previous: Option<String>,
@@ -14,14 +15,14 @@ pub struct ListData<T> {
 
 impl<T> ListData<T> {
     pub fn has_next(&self) -> bool {
-        match &self.next {
+        match self.next {
             Some(_) => true,
             _ => false,
         }
     }
 
     pub fn has_prev(&self) -> bool {
-        match &self.previous {
+        match self.previous {
             Some(_) => true,
             _ => false,
         }
