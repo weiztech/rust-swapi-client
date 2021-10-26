@@ -145,6 +145,8 @@ impl QueryList for People {}
 
 impl QueryDetail for People {}
 
+impl RequestHandler for People {}
+
 impl UrlPath for Film {
     const URL_PATH: &'static str = "/films/";
 }
@@ -152,6 +154,8 @@ impl UrlPath for Film {
 impl QueryList for Film {}
 
 impl QueryDetail for Film {}
+
+impl RequestHandler for Film {}
 
 impl UrlPath for Starship {
     const URL_PATH: &'static str = "/starships/";
@@ -161,6 +165,8 @@ impl QueryList for Starship {}
 
 impl QueryDetail for Starship {}
 
+impl RequestHandler for Starship {}
+
 impl UrlPath for Vehicle {
     const URL_PATH: &'static str = "/vehicles/";
 }
@@ -169,6 +175,8 @@ impl QueryList for Vehicle {}
 
 impl QueryDetail for Vehicle {}
 
+impl RequestHandler for Vehicle {}
+
 impl UrlPath for Species {
     const URL_PATH: &'static str = "/species/";
 }
@@ -176,3 +184,5 @@ impl UrlPath for Species {
 impl QueryList for Species {}
 
 impl QueryDetail for Species {}
+
+impl RequestHandler for Species {}
