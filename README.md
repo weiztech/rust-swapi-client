@@ -29,7 +29,7 @@ let planet_list = Planet::list(Some(2)).unwrap();
 planet_list.has_next();
 planet_list.has_prev();
 
-// Query to next and prev pagination, return Option<Box<ListData>>
+// Query to next or prev pagination, return Option<Box<ListData>>
 planet_list.next();
 planet_list.prev();
 
