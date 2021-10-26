@@ -73,15 +73,6 @@ pub trait RequestHandler: QueryDetail + QueryList {
     }
 }
 
-impl<T> UrlPath for ListData<T>
-where
-    T: UrlPath,
-{
-    const URL_PATH: &'static str = T::URL_PATH;
-}
-
-impl<T> QueryList for ListData<T> where T: UrlPath {}
-
 impl<T: QueryList + DeserializeOwned> ListData<T> {
     fn get_page_value(&self) -> u8 {
         match self.current_page {
