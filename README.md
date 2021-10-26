@@ -10,38 +10,31 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-swapi_client = "0.0.3"
+swapi_client = "0.0.5"
 ```
 
-Query Star Wars objects:
+Example Usage:
 
 ```
 use swapi_client::RequestHandler;
 use swapi_client::{Film, People, Planet, Species, Starship, Vehicle};
 
-println!("API Planet GET: {:?}", Planet::get(10));
-let planets = Planet::list(Some(2));
-println!("API Planet LIST: {:?}", planets);
+// Get Planet object
+Planet::get(10);
 
-println!("\nAPI Film GET {:?}", People::get(10));
-println!("API Film LIST {:?}", Film::list(None));
+// Get Planets
+let planet_list = Planet::list(Some(2)).unwrap();
 
-println!("\nAPI People GET {:?}", People::get(1));
-println!("API People LIST {:?}", People::list(None));
+// Check list data has prev or next pagination
+planet_list.has_next();
+planet_list.has_prev();
 
-println!("\nAPI Species GET {:?}", Species::get(1));
-println!("API Species LIST {:?}", Species::list(None));
-
-println!("\nAPI Starship GET {:?}", Starship::get(2));
-println!("API Starship LIST {:?}", Starship::list(None));
-
-println!("\nAPI Vehicle GET {:?}", Vehicle::get(7));
-println!("API Vehicle LIST {:?}", Vehicle::list(None));
-
+// List data query next and prev
+planet_list.next();
+planet_list.prev();
 
 // Iterate from list data
-for nplanet in planets.unwrap().into_iter() {
-  println!("Planet: {}", nplanet.name);
+for planet in planet_list.into_iter() {
+  println!("Planet: {}", planet.name);
 }
-
 ```
