@@ -1,6 +1,7 @@
 # Rust Swapi Client
 
 [![Crate](https://img.shields.io/crates/v/swapi-client)](https://crates.io/crates/swapi-client)
+[![Github](https://img.shields.io/github/v/release/weiztech/rust-swapi-client)](https://github.com/weiztech/rust-swapi-client)
 
 Rust client for Star Wars API (https://swapi.co/)
 
@@ -10,7 +11,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-swapi_client = "0.0.5"
+swapi_client = "0.0.5.1"
 ```
 
 Example Usage:
